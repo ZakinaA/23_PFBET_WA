@@ -64,7 +64,7 @@ public class AthleteProxy {
 
     /**
      * Add a new athlete
-     * @param e A new athlete (without an id)
+     * @param a A new athlete (without an id)
      * @return The athlete full filled (with an id)
      */
     public Athlete createAthlete(Athlete a) {
