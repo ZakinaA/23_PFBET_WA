@@ -1,8 +1,8 @@
 package bts.sio.webapp.repository;
 
-
 import bts.sio.webapp.CustomProperties;
 import bts.sio.webapp.model.Athlete;
+import bts.sio.webapp.model.Sport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,73 +14,73 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Component
-public class AthleteProxy {
+public class SportProxy {
     @Autowired
     private CustomProperties props;
 
     /**
-     * Get all athletes
-     * @return An iterable of all athlete
+     * Get all sports
+     * @return An iterable of all sports
      */
-    public Iterable<Athlete> getAthletes() {
+    public Iterable<Sport> getSports() {
 
         String baseApiUrl = props.getApiUrl();
-        String getAthletesUrl = baseApiUrl + "/athletes";
-        System.out.println("url=" + getAthletesUrl);
+        String getSportsUrl = baseApiUrl + "/sports";
+        System.out.println("url=" + getSportsUrl);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Iterable<Athlete>> response = restTemplate.exchange(
-                getAthletesUrl,
+        ResponseEntity<Iterable<Sport>> response = restTemplate.exchange(
+                getSportsUrl,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Iterable<Athlete>>() {}
+                new ParameterizedTypeReference<Iterable<Sport>>() {}
         );
 
-        log.debug("Get Athletes call " + response.getStatusCode().toString());
+        log.debug("Get Sports call " + response.getStatusCode().toString());
 
         return response.getBody();
     }
 
     /**
-     * Get an athlete by the id
-     * @param id The id of the athlete
-     * @return The athlete which matches the id
+     * Get an sport by the id
+     * @param id The id of the sport
+     * @return The sport which matches the id
      */
-    public Athlete getAthlete(int id) {
+    public Sport getSport(int id) {
         String baseApiUrl = props.getApiUrl();
-        String getEmployeeUrl = baseApiUrl + "/athlete/" + id;
+        String getEmployeeUrl = baseApiUrl + "/sport/" + id;
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Athlete> response = restTemplate.exchange(
+        ResponseEntity<Sport> response = restTemplate.exchange(
                 getEmployeeUrl,
                 HttpMethod.GET,
                 null,
-                Athlete.class
+                Sport.class
         );
 
-        log.debug("Get Athlete call " + response.getStatusCode().toString());
+        log.debug("Get Sport call " + response.getStatusCode().toString());
 
         return response.getBody();
     }
 
     /**
-     * Add a new athlete
-     * @param a A new athlete (without an id)
+     * Add a new sport
+     * @param a A new sport (without an id)
      * @return The athlete full filled (with an id)
      */
-    public Athlete createAthlete(Athlete a) {
+    public Sport createSport(Sport a) {
 
         String baseApiUrl = props.getApiUrl();
-        String createAthleteUrl = baseApiUrl + "/athlete";
+        String createSportUrl = baseApiUrl + "/sport";
 
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Athlete> request = new HttpEntity<Athlete>(a);
-        ResponseEntity<Athlete> response = restTemplate.exchange(
-                createAthleteUrl,
+        HttpEntity<Sport> request = new HttpEntity<Sport>(a);
+        ResponseEntity<Sport> response = restTemplate.exchange(
+                createSportUrl,
                 HttpMethod.POST,
                 request,
-                Athlete.class);
+                Sport.class);
 
-        log.debug("Create Athlete call " + response.getStatusCode().toString());
+        log.debug("Create Sport call " + response.getStatusCode().toString());
 
         return response.getBody();
     }
@@ -89,39 +89,42 @@ public class AthleteProxy {
      * Update an athlete - using the PUT HTTP Method.
      * @param e Existing athlete to update
      */
-    public Athlete updateAthlete(Athlete e) {
+    public Sport updateSport(Sport e) {
         String baseApiUrl = props.getApiUrl();
-        String updateAthleteUrl = baseApiUrl + "/athlete/" + e.getId();
+        String updateSportUrl = baseApiUrl + "/sport/" + e.getId();
 
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<Athlete> request = new HttpEntity<Athlete>(e);
-        ResponseEntity<Athlete> response = restTemplate.exchange(
-                updateAthleteUrl,
+        HttpEntity<Sport> request = new HttpEntity<Sport>(e);
+        ResponseEntity<Sport> response = restTemplate.exchange(
+                updateSportUrl,
                 HttpMethod.PUT,
                 request,
-                Athlete.class);
+                Sport.class);
 
-        log.debug("Update Athlete call " + response.getStatusCode().toString());
+        log.debug("Update Sport call " + response.getStatusCode().toString());
 
         return response.getBody();
     }
+
+
+
 
     /**
      * Delete an athlete using exchange method of RestTemplate
      * instead of delete method in order to log the response status code.
      * @param e The athlete to delete
      */
-    public void deleteAthlete(int id) {
+    public void deleteSport(int id) {
         String baseApiUrl = props.getApiUrl();
-        String deleteAthleteUrl = baseApiUrl + "/athlete/" + id;
+        String deleteSportUrl = baseApiUrl + "/sport/" + id;
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Void> response = restTemplate.exchange(
-                deleteAthleteUrl,
+                deleteSportUrl,
                 HttpMethod.DELETE,
                 null,
                 Void.class);
 
-        log.debug("Delete Athlete call " + response.getStatusCode().toString());
+        log.debug("Delete Sport call " + response.getStatusCode().toString());
     }
 }
