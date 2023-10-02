@@ -43,8 +43,7 @@ public class AthleteController {
         Iterable<Pays> listPays = paysService.getLesPays();
         model.addAttribute("listPays", listPays);
 
-        Iterable<Sport> listSports = sportService.getSports();
-        model.addAttribute("listSports", listSports);
+
 
         return "athlete/formNewAthlete";
     }
@@ -57,8 +56,7 @@ public class AthleteController {
         Iterable<Pays> listPays = paysService.getLesPays();
         model.addAttribute("listPays", listPays);
 
-        Iterable<Sport> listSports = sportService.getSports();
-        model.addAttribute("listSports", listSports);
+
 
         return "athlete/formUpdateAthlete";
     }

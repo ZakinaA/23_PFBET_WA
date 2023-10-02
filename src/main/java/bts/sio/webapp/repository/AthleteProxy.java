@@ -20,6 +20,7 @@ public class AthleteProxy {
 
     /**
      * Get all athletes
+     *
      * @return An iterable of all athlete
      */
     public Iterable<Athlete> getAthletes() {
@@ -32,7 +33,8 @@ public class AthleteProxy {
                 getAthletesUrl,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Iterable<Athlete>>() {}
+                new ParameterizedTypeReference<Iterable<Athlete>>() {
+                }
         );
 
         log.debug("Get Athletes call " + response.getStatusCode().toString());
@@ -42,6 +44,7 @@ public class AthleteProxy {
 
     /**
      * Get an athlete by the id
+     *
      * @param id The id of the athlete
      * @return The athlete which matches the id
      */
@@ -64,6 +67,7 @@ public class AthleteProxy {
 
     /**
      * Add a new athlete
+     *
      * @param a A new athlete (without an id)
      * @return The athlete full filled (with an id)
      */
@@ -87,6 +91,7 @@ public class AthleteProxy {
 
     /**
      * Update an athlete - using the PUT HTTP Method.
+     *
      * @param e Existing athlete to update
      */
     public Athlete updateAthlete(Athlete e) {
@@ -109,7 +114,7 @@ public class AthleteProxy {
     /**
      * Delete an athlete using exchange method of RestTemplate
      * instead of delete method in order to log the response status code.
-     * @param e The athlete to delete
+     *
      */
     public void deleteAthlete(int id) {
         String baseApiUrl = props.getApiUrl();
