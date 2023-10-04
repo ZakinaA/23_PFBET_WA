@@ -1,6 +1,8 @@
 package bts.sio.webapp.controller.pari;
 
-
+import bts.sio.webapp.model.Athlete;
+import bts.sio.webapp.model.Pays;
+import bts.sio.webapp.model.Sport;
 import bts.sio.webapp.model.pari.Pari;
 import bts.sio.webapp.service.pari.PariService;
 import bts.sio.webapp.service.PaysService;
@@ -28,22 +30,32 @@ public class PariController {
     private SportService sportService;
 
 
-
     @GetMapping("/createPari")
     public String createPari(Model model) {
         Pari a = new Pari();
         model.addAttribute("pari", a);
 
-
-
         return "pari/formNewPari";
+    }
+
+    @GetMapping("listParis")
+    public String homePari(Model model) {
+        Iterable<Pari> listParis = pariservice.getParis();
+        model.addAttribute("paris", listParis);
+        return "pari/homePari";
+    }
+
+    @GetMapping("listParisAdm")
+    public String homePari2(Model model) {
+        Iterable<Pari> listParis = pariservice.getParis();
+        model.addAttribute("paris", listParis);
+        return "pari/homePari2";
     }
 
     @GetMapping("/updatePari/{id}")
     public String updatePari(@PathVariable("id") final int id, Model model) {
         Pari a = pariservice.getPari(id);
         model.addAttribute("pari", a);
-
 
 
         return "pari/formUpdatePari";
@@ -58,11 +70,20 @@ public class PariController {
     @PostMapping("/savePari")
     public ModelAndView savePari(@ModelAttribute Pari pari) {
         System.out.println("controller save=" + pari.getLibelle());
-        if(pari.getId() != null) {
+        if (pari.getId() != null) {
             Pari current = pariservice.getPari(pari.getId());
             pari.setLibelle(current.getLibelle());
         }
         pariservice.savePari(pari);
         return new ModelAndView("redirect:/");
+    }
+
+
+    @GetMapping("/")
+    public String home(Model model) {
+        Iterable<Pari> listParis = pariservice.getParis();
+        model.addAttribute("paris", listParis);
+        return "home";
+
     }
 }
