@@ -26,6 +26,7 @@ public class AthleteController {
 
     @Autowired
     private PaysService paysService;
+    private SportService sportService;
 
     @GetMapping("/")
     public String home(Model model) {
@@ -55,8 +56,7 @@ public class AthleteController {
         Iterable<Pays> listPays = paysService.getLesPays();
         model.addAttribute("listPays", listPays);
 
-        Iterable<Sport> listSport = SportService.getSports();
-        model.addAttribute("listSport", listSport);
+
 
         return "athlete/formUpdateAthlete";
     }
