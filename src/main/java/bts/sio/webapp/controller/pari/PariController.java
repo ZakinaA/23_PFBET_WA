@@ -1,8 +1,6 @@
 package bts.sio.webapp.controller.pari;
 
-import bts.sio.webapp.model.Athlete;
-import bts.sio.webapp.model.Pays;
-import bts.sio.webapp.model.Sport;
+
 import bts.sio.webapp.model.pari.Pari;
 import bts.sio.webapp.service.pari.PariService;
 import bts.sio.webapp.service.PaysService;
@@ -28,6 +26,7 @@ public class PariController {
     @Autowired
     private PaysService paysService;
     private SportService sportService;
+
 
 
     @GetMapping("/createPari")
