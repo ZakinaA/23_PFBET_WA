@@ -35,16 +35,20 @@ public class PariController {
         Pari a = new Pari();
         model.addAttribute("pari", a);
 
-
-
         return "pari/formNewPari";
+    }
+
+    @GetMapping("listParis")
+    public String homePari(Model model) {
+        Iterable<Pari> listParis = pariservice.getParis();
+        model.addAttribute("paris", listParis);
+        return "pari/homePari";
     }
 
     @GetMapping("/updatePari/{id}")
     public String updatePari(@PathVariable("id") final int id, Model model) {
         Pari a = pariservice.getPari(id);
         model.addAttribute("pari", a);
-
 
 
         return "pari/formUpdatePari";
@@ -59,11 +63,20 @@ public class PariController {
     @PostMapping("/savePari")
     public ModelAndView savePari(@ModelAttribute Pari pari) {
         System.out.println("controller save=" + pari.getLibelle());
-        if(pari.getId() != null) {
+        if (pari.getId() != null) {
             Pari current = pariservice.getPari(pari.getId());
             pari.setLibelle(current.getLibelle());
         }
         pariservice.savePari(pari);
         return new ModelAndView("redirect:/");
+    }
+
+
+    @GetMapping("/")
+    public String home(Model model) {
+        Iterable<Pari> listParis = pariservice.getParis();
+        model.addAttribute("paris", listParis);
+        return "home";
+
     }
 }

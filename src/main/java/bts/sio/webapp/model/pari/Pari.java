@@ -8,15 +8,17 @@ public class Pari {
     private String libelle;
     private String place;
     private String mise;
+    private String cote;
 
     public Pari() {
     }
 
-    public Pari(Integer id, String nom) {
+    public Pari(Integer id) {
         this.id = id;
         this.libelle = libelle;
         this.place = place;
         this.mise = mise;
+        this.cote = cote;
     }
 
 

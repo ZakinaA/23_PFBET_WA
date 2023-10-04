@@ -2,7 +2,6 @@ package bts.sio.webapp.controller;
 
 import bts.sio.webapp.model.Athlete;
 import bts.sio.webapp.model.Pays;
-import bts.sio.webapp.model.Sport;
 import bts.sio.webapp.service.AthleteService;
 import bts.sio.webapp.service.PaysService;
 import bts.sio.webapp.service.SportService;
@@ -28,11 +27,11 @@ public class AthleteController {
     private PaysService paysService;
     private SportService sportService;
 
-    @GetMapping("/")
+    @GetMapping("listAthletes")
     public String home(Model model) {
         Iterable<Athlete> listAthletes = athleteservice.getAthletes();
         model.addAttribute("athletes", listAthletes);
-        return "home";
+        return "athlete/homeAthlete";
     }
 
     @GetMapping("/createAthlete")

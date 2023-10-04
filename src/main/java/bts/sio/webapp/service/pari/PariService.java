@@ -18,7 +18,7 @@ public class PariService {
         return pariProxy.getPari(id);
     }
 
-    public Iterable<Pari> getPari() {
+    public Iterable<Pari> getParis() {
         return pariProxy.getParis();
     }
 
