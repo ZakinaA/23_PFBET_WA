@@ -1,5 +1,6 @@
 package bts.sio.webapp.service.pari;
 
+import bts.sio.webapp.model.Athlete;
 import bts.sio.webapp.model.pari.Pari;
 import bts.sio.webapp.repository.pari.PariProxy;
 import lombok.Data;
@@ -26,6 +27,28 @@ public class PariService {
         pariProxy.deletePari(id);
     }
 
-    public void savePari(Pari pari) {
+
+     public Pari savePari(Pari pari) {
+         Pari savedPari;
+
+         // Functional rule : Last name must be capitalized.
+         pari.setLibelle(pari.getLibelle());
+         pari.setPlace(pari.getPlace());
+         pari.setMise(pari.getMise());
+         pari.setCote(pari.getCote());
+
+         if(pari.getId() == null) {
+             // If id is null, then it is a new employee.
+             savedPari = pariProxy.createPari(pari);
+         } else {
+             savedPari =pariProxy.updatePari(pari);
+         }
+
+         return savedPari;
+
+    }
+
+
+    public void savePari2(Pari pari) {
     }
 }

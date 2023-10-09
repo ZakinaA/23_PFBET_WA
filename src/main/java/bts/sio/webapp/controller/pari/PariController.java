@@ -47,9 +47,24 @@ public class PariController {
 
     @GetMapping("listParisAdm")
     public String homePari2(Model model) {
-        Iterable<Pari> listParis = pariservice.getParis();
-        model.addAttribute("paris", listParis);
+        Iterable<Pari> listParisAdm = pariservice.getParis();
+        model.addAttribute("paris", listParisAdm);
         return "pari/homePari2";
+    }
+
+    @GetMapping("listAdmInterface")
+    public String homePari3(Model model) {
+        Iterable<Pari> listAdmInterface = pariservice.getParis();
+        model.addAttribute("paris", listAdmInterface);
+        return "pari/homePari3";
+    }
+
+    @GetMapping("interfaceParier")
+    public String parier(Model model) {
+        Iterable<Pari> interfaceParier = pariservice.getParis();
+        model.addAttribute("paris", interfaceParier);
+
+        return "pari/parier";
     }
 
     @GetMapping("/updatePari/{id}")
@@ -57,14 +72,14 @@ public class PariController {
         Pari a = pariservice.getPari(id);
         model.addAttribute("pari", a);
 
-
         return "pari/formUpdatePari";
     }
+
 
     @GetMapping("/deletePari/{id}")
     public ModelAndView deletePari(@PathVariable("id") final int id) {
         pariservice.deletePari(id);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/listParisAdm");
     }
 
     @PostMapping("/savePari")
@@ -75,7 +90,18 @@ public class PariController {
             pari.setLibelle(current.getLibelle());
         }
         pariservice.savePari(pari);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/listParisAdm");
+    }
+
+    @PostMapping("/savePari2")
+    public ModelAndView savePari2(@ModelAttribute Pari pari) {
+        System.out.println("controller save=" + pari.getLibelle());
+        if (pari.getId() != null) {
+            Pari current = pariservice.getPari(pari.getId());
+            pari.setLibelle(current.getLibelle());
+        }
+        pariservice.savePari(pari);
+        return new ModelAndView("redirect:/listParis");
     }
 
 
