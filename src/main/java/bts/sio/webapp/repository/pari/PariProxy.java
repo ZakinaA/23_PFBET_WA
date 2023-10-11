@@ -70,7 +70,7 @@ public class PariProxy {
     public Pari createPari(Pari a) {
 
         String baseApiUrl = props.getApiUrl();
-        String createPariUrl = baseApiUrl + "/paris";
+        String createPariUrl = baseApiUrl + "/pari";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Pari> request = new HttpEntity<Pari>(a);
