@@ -1,12 +1,11 @@
 package bts.sio.webapp.controller.pari;
 
-import bts.sio.webapp.model.Athlete;
-import bts.sio.webapp.model.Pays;
-import bts.sio.webapp.model.Sport;
+import bts.sio.webapp.model.Epreuve;
 import bts.sio.webapp.model.pari.Pari;
 import bts.sio.webapp.service.pari.PariService;
 import bts.sio.webapp.service.PaysService;
 import bts.sio.webapp.service.SportService;
+import bts.sio.webapp.service.EpreuveService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,7 @@ public class PariController {
     @Autowired
     private PaysService paysService;
     private SportService sportService;
+    private EpreuveService epreuveService;
 
 
     @GetMapping("/createPari")
@@ -59,10 +59,21 @@ public class PariController {
         return "pari/homePari3";
     }
 
+
     @GetMapping("interfaceParier")
     public String parier(Model model) {
         Iterable<Pari> interfaceParier = pariservice.getParis();
         model.addAttribute("paris", interfaceParier);
+
+        return "pari/parier";
+    }
+
+
+
+    @GetMapping("interfaceEpreuve")
+    public String epreuve(Model model) {
+        Iterable<Epreuve> interfaceEpreuve = epreuveService.getEpreuves();
+        model.addAttribute("epreuves", interfaceEpreuve);
 
         return "pari/parier";
     }

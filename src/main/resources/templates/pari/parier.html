@@ -81,7 +81,7 @@
 
       <div class="epreuve">
         <tbody>
-        <tr th:if="${epreuves.empty}">
+        <tr th:if="${epreuves}">
           <td colspan="3">Aucune epreuve en cours</td>
         </tr>
         <tr th:each="epreuve: ${epreuves}">
@@ -91,7 +91,6 @@
 
           <td>
 
-            <a th:href="@{/deletePari/{id}(id=${pari.id})}"><button class="btn btn-danger">Cashout</button></a>
           </td>
         </tr>
         </tbody>
