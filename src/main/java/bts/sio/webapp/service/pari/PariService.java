@@ -48,7 +48,4 @@ public class PariService {
 
     }
 
-
-    public void savePari2(Pari pari) {
-    }
 }

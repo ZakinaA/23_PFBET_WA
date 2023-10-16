@@ -77,13 +77,24 @@
       <h2 class="h2">Parier</h2>
 
       <!-- Epreuve 1 -->
+
+
       <div class="epreuve">
-        <p><strong> Epreuve 1 : </strong><span class="team">100 Mètres - Homme</span>
-          <p><strong>Participants - Cotes : </strong></p>
-        </p> AIGRO Arsène - 2.31 </p>
-        </p> POIRIER Laurent - 4.21 </p>
-        </p> RICHARD Florian - 3.90 </p>
-        </p> STARCKMANN Paul - 1.15 </p>
+        <tbody>
+        <tr th:if="${epreuves.empty}">
+          <td colspan="3">Aucune epreuve en cours</td>
+        </tr>
+        <tr th:each="epreuve: ${epreuves}">
+          <td><span th:text="${epreuve.libelle}"> Libelle </span></td>
+          <td><span th:text="${epreuve.date_debut}"> Date Début </span></td>
+          <td><span th:text="${epreuve.date_fin}"> Date Fin </span></td>
+
+          <td>
+
+            <a th:href="@{/deletePari/{id}(id=${pari.id})}"><button class="btn btn-danger">Cashout</button></a>
+          </td>
+        </tr>
+        </tbody>
         <button class="bet-button" onclick="parier('Marteau', 'Vainqueur')"><a class="parier-text" th:href="@{/createPari}">Parier</a></button>
       </div>
 
