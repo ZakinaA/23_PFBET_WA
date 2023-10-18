@@ -1,5 +1,6 @@
 package bts.sio.webapp.controller.pari;
 
+import bts.sio.webapp.model.Athlete;
 import bts.sio.webapp.model.Epreuve;
 import bts.sio.webapp.model.pari.Pari;
 import bts.sio.webapp.service.pari.PariService;
@@ -31,7 +32,11 @@ public class PariController {
 
 
     @GetMapping("/createPari")
-    public String createPari(Model model) {
+    public String createPari(@PathVariable("id") final int id, Model model) {
+
+        Epreuve e= epreuveService.getEpreuve(id);
+        model.addAttribute("epreuve", e);
+
         Pari a = new Pari();
         model.addAttribute("pari", a);
 
@@ -45,6 +50,14 @@ public class PariController {
         return "pari/homePari";
     }
 
+    @GetMapping("listParis/{utilisateur_id}")
+    public String homePari(@PathVariable Long utilisateur_id, Model model) {
+        Iterable<Pari> listParis = pariservice.getParisByUserId(utilisateur_id);
+        model.addAttribute("paris", listParis);
+        return "pari/homePari";
+    }
+
+
     @GetMapping("listParisAdm")
     public String homePari2(Model model) {
         Iterable<Pari> listParisAdm = pariservice.getParis();
@@ -52,12 +65,7 @@ public class PariController {
         return "pari/homePari2";
     }
 
-    @GetMapping("listAdmInterface")
-    public String homePari3(Model model) {
-        Iterable<Pari> listAdmInterface = pariservice.getParis();
-        model.addAttribute("paris", listAdmInterface);
-        return "pari/homePari3";
-    }
+
 
 
     @GetMapping("interfaceParier")
@@ -68,15 +76,6 @@ public class PariController {
         return "pari/parier";
     }
 
-
-
-    @GetMapping("interfaceEpreuve")
-    public String epreuve(Model model) {
-        Iterable<Epreuve> interfaceEpreuve = epreuveService.getEpreuves();
-        model.addAttribute("epreuves", interfaceEpreuve);
-
-        return "pari/parier";
-    }
 
     @GetMapping("/updatePari/{id}")
     public String updatePari(@PathVariable("id") final int id, Model model) {
@@ -123,4 +122,6 @@ public class PariController {
         return "home";
 
     }
+
+
 }
