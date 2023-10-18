@@ -63,7 +63,7 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="/"> Accueil </a>
           <a class="navbar-brand" href="listAthletes">Système de gestion des athletes </a>
-          <a class="navbar-brand" href="interfaceParier"> Parier </a>
+          <a class="navbar-brand" href="listEpreuves"> Parier </a>
           <a class="navbar-brand" href="listAdmInterface"> Interface Admin </a>
           <a class="navbar-brand" href="listParis"> Mes Paris </a>
           <a class="navbar-brand" href="listParisAdm"> Admin User </a>
@@ -76,48 +76,39 @@
     <div class="container special">
       <h2 class="h2">Parier</h2>
 
-      <!-- Epreuve 1 -->
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
 
+        <thead>
+        <tr>
+          <th>Libellé</th>
+          <th> </th>
+          <th>Date Début</th>
+          <th>Date Fin</th>
+          <th>Sport</th>
+        </tr>
+        </thead>
 
-      <div class="epreuve">
         <tbody>
-        <tr th:if="${epreuves}">
-          <td colspan="3">Aucune epreuve en cours</td>
+        <tr th:if="${#lists.isEmpty(epreuves)}">
+          <td colspan="3">Aucune épreuve en cours</td>
         </tr>
         <tr th:each="epreuve: ${epreuves}">
-          <td><span th:text="${epreuve.libelle}"> Libelle </span></td>
-          <td><span th:text="${epreuve.date_debut}"> Date Début </span></td>
-          <td><span th:text="${epreuve.date_fin}"> Date Fin </span></td>
-
+          <td><span th:text="${epreuve.libelle}"> Libellé </span></td>
           <td>
+            <form method="post" th:action="@{/createPari}">
+              <input type="hidden" name="libelle" th:value="${epreuve.libelle}" />
+              <button type="submit" class="bet-button">Parier</button>
+            </form>
+          </td>
 
+          <td><span th:text="${#temporals.format(epreuve.date_debut, 'yyyy-MM-dd')}"> Date Début </span></td>
+          <td><span th:text="${#temporals.format(epreuve.date_fin, 'yyyy-MM-dd')}"> Date Fin </span></td>
+          <td><span th:text="${epreuve.sport.nom}"> Sport </span></td>
+          <td>
           </td>
         </tr>
         </tbody>
-        <button class="bet-button" onclick="parier('Marteau', 'Vainqueur')"><a class="parier-text" th:href="@{/createPari}">Parier</a></button>
-      </div>
-
-      <!-- Epreuve 2 -->
-      <div class="epreuve">
-        <p><strong> Epreuve 2 : </strong><span class="team">500 Mètres - Femme</span>
-        <p><strong>Participants - Cotes : </strong></p>
-        </p> DIOP Claire - 3.74 </p>
-        </p> DUPONT Michelle - 6.65 </p>
-        </p> LUCIANI Laura - 1.98 </p>
-        </p> AIGRO Louane - 1.80 </p>
-        <button class="bet-button" onclick="parier('Marteau', 'Vainqueur')"><a class="parier-text" th:href="@{/createPari}">Parier</a></button>
-      </div>
-
-      <!-- Epreuve 3 -->
-      <div class="epreuve">
-        <p><strong> Epreuve 3 : </strong><span class="team">Lancer de Javelots - Homme</span>
-        <p><strong>Participants - Cotes : </strong></p>
-        </p> BONBEUR Jean - 9.64 </p>
-        </p> AIGRO Stéphane - 1.12 </p>
-        </p> DAIS Giuseppe - 5.14 </p>
-        </p> NARD Marco - 4.98 </p>
-        </p> OUPROCHE Pat - 2.50 </p>
-        <button class="bet-button" onclick="parier('Marteau', 'Vainqueur')"><a class="parier-text" th:href="@{/createPari}">Parier</a></button>
       </div>
 
     </div>

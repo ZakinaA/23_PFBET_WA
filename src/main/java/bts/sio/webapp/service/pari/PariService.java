@@ -48,4 +48,9 @@ public class PariService {
 
     }
 
+    public Iterable<Pari> getParisByUserId(Long utilisateur_id) {
+
+        return pariProxy.getParisByUserId(utilisateur_id);
+    }
+
 }

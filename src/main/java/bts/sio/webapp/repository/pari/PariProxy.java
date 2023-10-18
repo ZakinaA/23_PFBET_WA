@@ -123,4 +123,22 @@ public class PariProxy {
 
         log.debug("Delete Pari call " + response.getStatusCode().toString());
     }
+
+    public Iterable<Pari> getParisByUserId(Long utilisateur_id) {
+
+        String baseApiUrl = props.getApiUrl();
+        String getParisByUserIdUrl = baseApiUrl + "/paris/" + utilisateur_id;
+        System.out.println("url=" + getParisByUserIdUrl);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Iterable<Pari>> response = restTemplate.exchange(
+                getParisByUserIdUrl,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<Iterable<Pari>>() {}
+        );
+
+        log.debug(" Get Paris By utilisateur_id call " + response.getStatusCode().toString());
+
+        return response.getBody();
+    }
 }

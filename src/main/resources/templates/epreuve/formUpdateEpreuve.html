@@ -16,7 +16,7 @@
         integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
         crossorigin="anonymous">
 
-  <title>Ajout Pari</title>
+  <title>Modification Epreuve</title>
 
   <style>
     body {
@@ -33,7 +33,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="../listEpreuves">Retour</a>
+      <a class="navbar-brand" href="../listParisAdm">Retour</a>
     </div>
   </div>
 </nav>
@@ -41,47 +41,43 @@
 
 <div class="container special">
 
-  <h2 class="h2">Ajout d'un nouveau pari</h2>
+  <h2 class="h2">Modification d'une epreuve</h2>
   <div>
     <form method="post"
-          th:action="@{/savePari}" th:object="${pari}">
-
-
+          th:action="@{/saveEpreuve}" th:object="${epreuve}">
+      <div class="form-group">
+        <input
+                type="hidden" th:field="*{id}" class="form-control">
+      </div>
       <div class="form-group">
         <label for="libelleInput">Libelle</label>
         <input
                 type="text" th:field="*{libelle}" class="form-control" id="libelleInput"
                 aria-describedby="libelleInputHelp" placeholder="Saisir le libelle"> <small
-              id="libelleInputHelp" class="form-text text-muted">Merci d'écrire le libelle de l'athlète.</small>
+              id="libelleInputHelp" class="form-text text-muted"></small>
       </div>
 
       <div class="form-group">
         <label for="placeInput">Place</label>
         <input
-                type="text" th:field="*{place}" class="form-control" id="placeInput"
-                aria-describedby="placeInputHelp" placeholder="Saisir la place"> <small
-              id="placeInputHelp" class="form-text text-muted">Merci d'écrire la place</small>
+                type="text" th:field="*{date_debut}" class="form-control" id="placeInput"
+                aria-describedby="placeInputHelp" placeholder="Saisir la date de début"> <small
+              id="placeInputHelp" class="form-text text-muted">Saisir la date de début</small>
       </div>
 
       <div class="form-group">
         <label for="miseInput">Mise</label>
         <input
-                type="text" th:field="*{mise}" class="form-control" id="miseInput"
-                aria-describedby="miseInputHelp" placeholder="Saisir la mise"> <small
-              id="miseInputHelp" class="form-text text-muted">Merci d'écrire la mise</small>
-      </div>
-
-      <div class="form-group">
-        <label for="coteInput">Cote</label>
-        <input
-                type="text" th:field="*{cote}" class="form-control" id="coteInput"
-                aria-describedby="coteInputHelp" placeholder="Saisir la cote"> <small
-              id="coteInputHelp" class="form-text text-muted">Merci d'écrire la cote</small>
+                type="text" th:field="*{date_fin}" class="form-control" id="miseInput"
+                aria-describedby="miseInputHelp" placeholder="Saisir la date de fin"> <small
+              id="miseInputHelp" class="form-text text-muted">Saisir la date de fin</small>
       </div>
 
 
-      <a th:href="@{/createPari/{id}(id=${pari.id})}"><button class="btn btn-info">Créer</button></a>
-    </form>
+
+
+      <a th:href="@{/updateEpreuve/{id}(id=${epreuve.id})}"><button class="btn btn-info">Modifier</button></a>
+
   </div>
 
 </div>

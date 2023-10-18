@@ -3,6 +3,7 @@ package bts.sio.webapp.controller;
 import bts.sio.webapp.model.Athlete;
 import bts.sio.webapp.model.Epreuve;
 import bts.sio.webapp.model.Pays;
+import bts.sio.webapp.model.pari.Pari;
 import bts.sio.webapp.service.AthleteService;
 import bts.sio.webapp.service.EpreuveService;
 import bts.sio.webapp.service.PaysService;
@@ -32,8 +33,15 @@ public class EpreuveController {
     @GetMapping("listEpreuves")
     public String home(Model model) {
         Iterable<Epreuve> listEpreuves = epreuveservice.getEpreuves();
-        model.addAttribute("epreuve", listEpreuves);
+        model.addAttribute("epreuves", listEpreuves);
         return "pari/parier";
+    }
+
+    @GetMapping("listAdmInterface")
+    public String homePari3(Model model) {
+        Iterable<Epreuve> listEpreuves = epreuveservice.getEpreuves();
+        model.addAttribute("epreuves", listEpreuves);
+        return "pari/homePari3";
     }
 
     @GetMapping("/createEpreuve")
@@ -51,7 +59,7 @@ public class EpreuveController {
 
     @GetMapping("/updateEpreuve/{id}")
     public String updateEpreuve(@PathVariable("id") final int id, Model model) {
-        Epreuve a = epreuveservice.getEpreuves(id);
+        Epreuve a = epreuveservice.getEpreuve(id);
         model.addAttribute("epreuve", a);
 
         Iterable<Pays> listPays = paysService.getLesPays();
@@ -59,13 +67,13 @@ public class EpreuveController {
 
 
 
-        return "epreuve/formNewEpreuve";
+        return "epreuve/formUpdateEpreuve";
     }
 
     @GetMapping("/deleteEpreuve/{id}")
     public ModelAndView deleteEpreuve(@PathVariable("id") final int id) {
         epreuveservice.deleteEpreuve(id);
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:listAdmInterface");
     }
 
 }
