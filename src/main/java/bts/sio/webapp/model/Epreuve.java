@@ -10,6 +10,7 @@ public class Epreuve {
     private String libelle;
     private LocalDate date_debut;
     private LocalDate date_fin;
+    private Sport sport;
 
 
     public Epreuve() {
@@ -20,6 +21,7 @@ public class Epreuve {
         this.libelle = libelle;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+        this.sport = sport;
     }
 
 

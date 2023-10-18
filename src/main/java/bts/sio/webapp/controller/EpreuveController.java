@@ -32,8 +32,15 @@ public class EpreuveController {
     @GetMapping("listEpreuves")
     public String home(Model model) {
         Iterable<Epreuve> listEpreuves = epreuveservice.getEpreuves();
-        model.addAttribute("epreuve", listEpreuves);
+        model.addAttribute("epreuves", listEpreuves);
         return "pari/parier";
+    }
+
+    @GetMapping("listAdmInterface")
+    public String homePari3(Model model) {
+        Iterable<Epreuve> listEpreuves = epreuveservice.getEpreuves();
+        model.addAttribute("epreuves", listEpreuves);
+        return "pari/homePari3";
     }
 
     @GetMapping("/createEpreuve")
@@ -51,7 +58,7 @@ public class EpreuveController {
 
     @GetMapping("/updateEpreuve/{id}")
     public String updateEpreuve(@PathVariable("id") final int id, Model model) {
-        Epreuve a = epreuveservice.getEpreuves(id);
+        Epreuve a = epreuveservice.getEpreuve(id);
         model.addAttribute("epreuve", a);
 
         Iterable<Pays> listPays = paysService.getLesPays();

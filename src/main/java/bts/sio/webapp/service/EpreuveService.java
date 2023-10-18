@@ -14,7 +14,7 @@ public class EpreuveService {
     @Autowired
     private EpreuveProxy epreuveProxy;
 
-    public Epreuve getEpreuves(final int id) {
+    public Epreuve getEpreuve(final int id) {
         return epreuveProxy.getEpreuve(id);
     }
 
