@@ -1,7 +1,7 @@
 package bts.sio.webapp.repository;
 
 import bts.sio.webapp.CustomProperties;
-import bts.sio.webapp.model.Pays;
+import bts.sio.webapp.model.Utilisateur;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -12,29 +12,29 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Component
-public class PaysProxy {
+public class UtilisateurProxy {
 
     @Autowired
     private CustomProperties props;
 
     /**
-     * Get all pays
-     * @return An iterable of all pays
+     * Get all utilisateurs
+     * @return An iterable of all utilisateurs
      */
-    public Iterable<Pays> getLesPays() {
+    public Iterable<Utilisateur> getLesUtilisateurs() {
 
         String baseApiUrl = props.getApiUrl();
-        String getPaysUrl = baseApiUrl + "/pays";
-        System.out.println("url=" + getPaysUrl);
+        String getLesUtilisateursUrl = baseApiUrl + "/utilisateur";
+        System.out.println("url=" + getLesUtilisateursUrl);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Iterable<Pays>> response = restTemplate.exchange(
-                getPaysUrl,
+        ResponseEntity<Iterable<Utilisateur>> response = restTemplate.exchange(
+                getLesUtilisateursUrl,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<Iterable<Pays>>() {}
+                new ParameterizedTypeReference<Iterable<Utilisateur>>() {}
         );
 
-        log.debug("Get Pays call " + response.getStatusCode().toString());
+        log.debug("Get Utilisateur call " + response.getStatusCode().toString());
 
         return response.getBody();
     }

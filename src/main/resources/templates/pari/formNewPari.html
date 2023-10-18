@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet"
-		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-		  crossorigin="anonymous">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
 
-	<link rel="stylesheet"
-		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-		  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-		  crossorigin="anonymous">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
 
-	<title>Paris 2024</title>
+  <title>Ajout Pari</title>
 
-	<style>
-		body {
-			padding-top: 50px;
-		}
+  <style>
+    body {
+      padding-top: 50px;
+    }
 
-		.special {
-			padding-top: 50px;
-		}
-	</style>
+    .special {
+      padding-top: 50px;
+    }
+  </style>
 </head>
 <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-	<div class="container">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="..">Système de gestion des
-				athletes</a>
-		</div>
-	</div>
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../listEpreuves">Retour</a>
+    </div>
+  </div>
 </nav>
 
 
 <div class="container special">
 
-	<h2 class="h2">Ajout d'un nouvel athlete</h2>
-	<div>
-		<form method="post"
-			  th:action="@{/saveAthlete}" th:object="${athlete}">
-			<div class="form-group">
-				<label for="prenomInput">Prénom</label>
-				<input
-						type="text" th:field="*{prenom}" class="form-control" id="firstNameInput"
-						aria-describedby="prenomHelp" placeholder="Saisir le prénom"> <small
-					id="prenomHelp" class="form-text text-muted">Merci d'écrire le prénom de l'athlète.</small>
-			</div>
-			<div class="form-group">
-				<label for="nomInput">Nom</label>
-				<input
-						type="text" th:field="*{nom}" class="form-control" id="nomInput"
-						aria-describedby="nomHelp" placeholder="Saisir le nom"> <small
-					id="nomHelp" class="form-text text-muted">Merci d'écrire le nom de l'athlète.</small>
-			</div>
-
-			<div class="form-group">
-				<label for="pays">Pays :</label>
-				<select id="pays" class="form-control" th:field="*{pays.id}">
-					<option value="">Sélectionnez un pays</option>
-					<option th:each="pays : ${listPays}" th:value="${pays.id}" th:text="${pays.nom}"></option>
-				</select>
-			</div>
-
-			<div class="form-group">
-				<label for="sport">Sport :</label>
-				<select id="sport" class="form-control" th:field="*{sport.id}">
-					<option value="">Sélectionnez un sport</option>
-					<option th:each="sport : ${listSport}" th:value="${sport.id}" th:text="${sport.nom}"></option>
-				</select>
-			</div>
+  <h2 class="h2">Ajout d'un nouveau pari</h2>
+  <div>
+    <form method="post"
+          th:action="@{/savePari}" th:object="${pari}">
 
 
-			<button type="submit" class="btn btn-primary">Créer</button>
-		</form>
-	</div>
+      <div class="form-group">
+        <label for="libelleInput">Libelle</label>
+        <input
+                type="text" th:field="*{libelle}" class="form-control" id="libelleInput"
+                aria-describedby="libelleInputHelp" placeholder="Saisir le libelle"> <small
+              id="libelleInputHelp" class="form-text text-muted">Merci d'écrire le libelle de l'athlète.</small>
+      </div>
+
+      <div class="form-group">
+        <label for="placeInput">Place</label>
+        <input
+                type="text" th:field="*{place}" class="form-control" id="placeInput"
+                aria-describedby="placeInputHelp" placeholder="Saisir la place"> <small
+              id="placeInputHelp" class="form-text text-muted">Merci d'écrire la place</small>
+      </div>
+
+      <div class="form-group">
+        <label for="miseInput">Mise</label>
+        <input
+                type="text" th:field="*{mise}" class="form-control" id="miseInput"
+                aria-describedby="miseInputHelp" placeholder="Saisir la mise"> <small
+              id="miseInputHelp" class="form-text text-muted">Merci d'écrire la mise</small>
+      </div>
+
+      <div class="form-group">
+        <label for="coteInput">Cote</label>
+        <input
+                type="text" th:field="*{cote}" class="form-control" id="coteInput"
+                aria-describedby="coteInputHelp" placeholder="Saisir la cote"> <small
+              id="coteInputHelp" class="form-text text-muted">Merci d'écrire la cote</small>
+      </div>
+
+
+      <a th:href="@{/createPari/{id}(id=${pari.id})}"><button class="btn btn-info">Créer</button></a>
+    </form>
+  </div>
 
 </div>
 
 <script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-		crossorigin="anonymous"></script>
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 </body>
 </html>

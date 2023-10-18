@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Paris 2024 </title>
+
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+              crossorigin="anonymous">
+
+        <title>Paris 2024</title>
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Interface de paris</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                }
+                .epreuve {
+                    border: 1px solid #ccc;
+                    margin: 10px;
+                    padding: 10px;
+                }
+                .team {
+                    font-weight: bold;
+                }
+                .bet-input {
+                    width: 40px;
+                }
+                .bet-button {
+                    padding: 5px 10px;
+                    background-color: #007bff;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                }
+                .parier-text {
+                    color: white;
+                }
+
+            </style>
+        </head>
+        <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/"> Accueil </a>
+                    <a class="navbar-brand" href="listAthletes">Système de gestion des athletes </a>
+                    <a class="navbar-brand" href="listEpreuves"> Parier </a>
+                    <a class="navbar-brand" href="listAdmInterface"> Interface Admin </a>
+                    <a class="navbar-brand" href="listParis"> Mes Paris </a>
+                    <a class="navbar-brand" href="listParisAdm"> Admin User </a>
+
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="container special">
+            <h2 class="h2">Parier</h2>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+
+                    <thead>
+                    <tr>
+                        <th>Libellé</th>
+                        <th> </th>
+                        <th>Date Début</th>
+                        <th>Date Fin</th>
+                        <th>Sport</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(epreuves)}">
+                        <td colspan="3">Aucune épreuve en cours</td>
+                    </tr>
+                    <tr th:each="epreuve: ${epreuves}">
+                        <td><span th:text="${epreuve.libelle}"> Libellé </span></td>
+                        <td>
+                            <form method="post" th:action="@{/createPari}">
+                                <input type="hidden" name="libelle" th:value="${epreuve.libelle}" />
+                                <button type="submit" class="bet-button">Parier</button>
+                            </form>
+                        </td>
+
+                        <td><span th:text="${#temporals.format(epreuve.date_debut, 'yyyy-MM-dd')}"> Date Début </span></td>
+                        <td><span th:text="${#temporals.format(epreuve.date_fin, 'yyyy-MM-dd')}"> Date Fin </span></td>
+                        <td><span th:text="${epreuve.sport.nom}"> Sport </span></td>
+                        <td>
+                        </td>
+                    </tr>
+                    </tbody>
+            </div>
+
+        </div>
+
+        <script
+                src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        </body>
+        </html></title>
+    </head>
+    <body>
+
+    </body>
+    </html>
