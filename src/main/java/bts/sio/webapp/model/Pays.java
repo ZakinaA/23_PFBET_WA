@@ -6,14 +6,14 @@ import lombok.Data;
 @Data
 public class Pays {
     private Integer id;
-    private String nom;
+    private String libelle;
 
     public Pays() {
     }
 
-    public Pays(Integer id, String nom) {
+    public Pays(Integer id, String libelle) {
         this.id = id;
-        this.nom = nom;
+        this.libelle = libelle;
     }
 
 
