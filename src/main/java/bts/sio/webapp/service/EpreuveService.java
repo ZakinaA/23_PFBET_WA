@@ -30,13 +30,13 @@ public class EpreuveService {
     public Epreuve saveEpreuve(Epreuve epreuve) {
         Epreuve savedEpreuve;
 
-        // Functional rule : Last name must be capitalized.
+
         epreuve.setLibelle(epreuve.getLibelle());
         epreuve.setDate_debut(epreuve.getDate_debut());
         epreuve.setDate_fin(epreuve.getDate_fin());
 
         if(epreuve.getId() == null) {
-            // If id is null, then it is a new employee.
+
             savedEpreuve = epreuveProxy.createEpreuve(epreuve);
         } else {
             savedEpreuve =epreuveProxy.updateEpreuve(epreuve);

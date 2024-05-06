@@ -79,6 +79,15 @@
               id="coteInputHelp" class="form-text text-muted">Merci d'écrire la cote</small>
       </div>
 
+      <div class="form-group">
+        <label for="athleteInput">Athlète</label>
+        <select th:field="*{athlete.id}" class="form-control" id="athleteInput">
+          <option th:each="athlete : ${athletes}" th:value="${athlete.id}" th:text="${athlete.nom}"></option>
+        </select>
+        <small id="athleteInputHelp" class="form-text text-muted">Merci de choisir l'athlète.</small>
+      </div>
+
+
 
       <a th:href="@{/createPari/{id}(id=${pari.id})}"><button class="btn btn-info">Créer</button></a>
     </form>

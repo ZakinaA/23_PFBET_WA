@@ -2,6 +2,7 @@ package bts.sio.webapp.repository;
 
 import bts.sio.webapp.CustomProperties;
 import bts.sio.webapp.model.Epreuve;
+import bts.sio.webapp.model.pari.Pari;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -85,7 +86,7 @@ public class EpreuveProxy {
     }
 
     /**
-     * Update an pari - using the PUT HTTP Method.
+     * Update a pari - using the PUT HTTP Method.
      * @param e Existing pari to update
      */
     public Epreuve updateEpreuve(Epreuve e) {
@@ -106,7 +107,7 @@ public class EpreuveProxy {
     }
 
     /**
-     * Delete an pari using exchange method of RestTemplate
+     * Delete a pari using exchange method of RestTemplate
      * instead of delete method in order to log the response status code.
      */
     public void deleteEpreuve(int id) {

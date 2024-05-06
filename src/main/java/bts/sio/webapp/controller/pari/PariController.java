@@ -3,6 +3,7 @@ package bts.sio.webapp.controller.pari;
 import bts.sio.webapp.model.Athlete;
 import bts.sio.webapp.model.Epreuve;
 import bts.sio.webapp.model.pari.Pari;
+import bts.sio.webapp.service.AthleteService;
 import bts.sio.webapp.service.pari.PariService;
 import bts.sio.webapp.service.PaysService;
 import bts.sio.webapp.service.SportService;
@@ -11,10 +12,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Data
@@ -27,21 +25,38 @@ public class PariController {
 
     @Autowired
     private PaysService paysService;
+    @Autowired
     private SportService sportService;
+    @Autowired
     private EpreuveService epreuveService;
+    @Autowired
+    private AthleteService athleteService;
+
 
 
     @GetMapping("/createPari")
-    public String createPari(@PathVariable("id") final int id, Model model) {
+    public String createPari(@RequestParam("id") final int id, Model model) {
+        Epreuve epreuve = epreuveService.getEpreuve(id);
 
-        Epreuve e= epreuveService.getEpreuve(id);
-        model.addAttribute("epreuve", e);
+        if (epreuve == null) {
+            return "redirect:/error";
+        }
 
-        Pari a = new Pari();
-        model.addAttribute("pari", a);
+        Pari pari = new Pari();
+
+        pari.setLibelle(epreuve.getLibelle());
+
+        Iterable<Athlete> athletes = athleteService.getAthletes();
+
+        // Ajouter les athlètes au modèle
+        model.addAttribute("athletes", athletes);
+
+        model.addAttribute("epreuve", epreuve);
+        model.addAttribute("pari", pari);
 
         return "pari/formNewPari";
     }
+
 
     @GetMapping("listParis")
     public String homePari(Model model) {
@@ -49,6 +64,7 @@ public class PariController {
         model.addAttribute("paris", listParis);
         return "pari/homePari";
     }
+
 
     @GetMapping("listParis/{utilisateur_id}")
     public String homePari(@PathVariable Long utilisateur_id, Model model) {
@@ -86,10 +102,11 @@ public class PariController {
     }
 
 
+
     @GetMapping("/deletePari/{id}")
     public ModelAndView deletePari(@PathVariable("id") final int id) {
         pariservice.deletePari(id);
-        return new ModelAndView("redirect:/listParisAdm");
+        return new ModelAndView("redirect:/listParis");
     }
 
     @PostMapping("/savePari")

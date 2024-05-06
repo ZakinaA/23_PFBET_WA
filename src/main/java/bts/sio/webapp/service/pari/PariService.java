@@ -31,14 +31,13 @@ public class PariService {
      public Pari savePari(Pari pari) {
          Pari savedPari;
 
-         // Functional rule : Last name must be capitalized.
-         pari.setLibelle(pari.getLibelle());
+
          pari.setPlace(pari.getPlace());
          pari.setMise(pari.getMise());
          pari.setCote(pari.getCote());
 
          if(pari.getId() == null) {
-             // If id is null, then it is a new employee.
+
              savedPari = pariProxy.createPari(pari);
          } else {
              savedPari =pariProxy.updatePari(pari);

@@ -86,7 +86,7 @@ public class PariProxy {
     }
 
     /**
-     * Update an pari - using the PUT HTTP Method.
+     * Update a pari - using the PUT HTTP Method.
      * @param e Existing pari to update
      */
     public Pari updatePari(Pari e) {
