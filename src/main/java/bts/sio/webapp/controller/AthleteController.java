@@ -19,12 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AthleteController {
 
-
     @Autowired
     private AthleteService athleteservice;
 
     @Autowired
     private PaysService paysService;
+
+    @Autowired
     private SportService sportService;
 
     @GetMapping("listAthletes")
@@ -42,8 +43,6 @@ public class AthleteController {
         Iterable<Pays> listPays = paysService.getLesPays();
         model.addAttribute("listPays", listPays);
 
-
-
         return "athlete/formNewAthlete";
     }
 
@@ -54,8 +53,6 @@ public class AthleteController {
 
         Iterable<Pays> listPays = paysService.getLesPays();
         model.addAttribute("listPays", listPays);
-
-
 
         return "athlete/formUpdateAthlete";
     }
@@ -75,5 +72,12 @@ public class AthleteController {
         }
         athleteservice.saveAthlete(athlete);
         return new ModelAndView("redirect:/");
+    }
+
+    @GetMapping("/athletes")
+    public String getAthletes(Model model) {
+        Iterable<Athlete> listAthletes = athleteservice.getAthletes();
+        model.addAttribute("athletes", listAthletes);
+        return "athleteList";
     }
 }

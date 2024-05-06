@@ -12,10 +12,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Data
@@ -62,13 +59,12 @@ public class EpreuveController {
         Epreuve a = epreuveservice.getEpreuve(id);
         model.addAttribute("epreuve", a);
 
-        Iterable<Pays> listPays = paysService.getLesPays();
-        model.addAttribute("listPays", listPays);
 
 
 
         return "epreuve/formUpdateEpreuve";
     }
+
 
     @GetMapping("/deleteEpreuve/{id}")
     public ModelAndView deleteEpreuve(@PathVariable("id") final int id) {

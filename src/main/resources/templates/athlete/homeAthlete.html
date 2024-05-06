@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +32,7 @@
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="/"> Accueil </a>
-      <a class="navbar-brand" href="listAthletes">Système de gestion des athletes </a>
+      <a class="navbar-brand" href="listAthletes"> Athletes </a>
       <a class="navbar-brand" href="listEpreuves"> Parier </a>
       <a class="navbar-brand" href="listAdmInterface"> Interface Admin </a>
       <a class="navbar-brand" href="listParis"> Mes Paris </a>
@@ -69,9 +68,9 @@
         <td><span th:text="${athlete.nom}"> Nom </span></td>
 
         <!--td><span th:text="${#dates.format(athlete.datenaiss, 'dd-MM-yyyy')}"> Nom </span></td-->
-        <td><span th:text="${#temporals.format(athlete.date_naissance, 'dd-MM-yyyy HH:mm')}"> Nom </span></td>
-        <td><span th:text="${athlete.pays.id}"> Nom </span></td>
-        <td><span th:text="${athlete.sport.id}"> Sport </span></td>
+        <td><span th:text="${#temporals.format(athlete.date_naissance, 'dd-MM-yyyy HH:mm')}"> Date de Naissance </span></td>
+        <td th:if="${athlete.pays != null}"><span th:text="${athlete.pays.id}"> Nom </span></td>
+        <td th:if="${athlete.sport != null}"><span th:text="${athlete.sport.id}"> Sport </span></td>
         <td>
           <a th:href="@{/updateAthlete/{id}(id=${athlete.id})}"><button class="btn btn-info"> Modifier </button></a>
           <a th:href="@{/deleteAthlete/{id}(id=${athlete.id})}"><button class="btn btn-danger"> Supprimer </button></a>
